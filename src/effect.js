@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useEffect } from "react";
 
@@ -28,5 +27,3 @@ function App(){
         />
     );
 }
-
-export default App;
