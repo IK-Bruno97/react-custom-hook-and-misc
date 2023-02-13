@@ -6,7 +6,7 @@ function GithubUser({name, location, img}){
         <>
             <h1>{name}</h1>
             <h1>{location}</h1>
-            <img src={img} />
+            <img alt="git avatar" src={img} />
         </>
         
 

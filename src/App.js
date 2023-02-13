@@ -1,30 +1,41 @@
-import {FaStar} from 'react-icons/fa';
-import { useState } from 'react';
+import { useState } from "react";
+import { useEffect } from "react";
 
-const createArray = (length) => [...Array(length)];
-
-function Star({selected=false, onSelect}){
-    return(
-        <FaStar color={ selected ? "red" : "grey"} onClick={onSelect} />
-    );
-}
-
-function StarRating({totalStars}){
-    const [selectedStars, setSelectedStars] = useState(0);
+function GithubUser({name, location, img}){
     return(
         <>
-            {
-                createArray(totalStars).map((n,i) => (
-                    <Star key={i} 
-                    selected = {selectedStars > i} 
-                    onSelect={()=>setSelectedStars(i + 1)} />
-                ))
-            }
-            <p> {selectedStars} of {totalStars} </p>     
+            <h1>{name}</h1>
+            <h1>{location}</h1>
+            <img alt="git avatar" src={img} />
         </>
-    );
+        
+
+    )
 }
 
 export default function App(){
-    return <StarRating totalStars={4} />;
+    const [data, setData] = useState(null);
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(false);
+
+    useEffect( () => {
+        setLoading(true);
+        fetch(
+            'https://api.github.com/users/IK-Bruno97'
+        ) 
+        .then( (res) => res.json())
+        .then(setData)
+        .then( () => setLoading(false))
+        .catch(setError);
+    }, []);
+
+    if(loading) return <h1 className="App">loading...</h1>;
+    if(error) return <pre>{JSON.stringify(error)}</pre>;
+    if(!data) return null;
+    return(
+        <GithubUser name={data.name}
+            location = {data.location}
+            img ={data.avatar}
+        />
+    );
 }
