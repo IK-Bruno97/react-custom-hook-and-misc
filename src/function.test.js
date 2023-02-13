@@ -8,6 +8,6 @@ test("Multiplies by Two", ()=>{
 
 test("renders an h1", ()=>{
     const {getByText} = render(<Star/>);
-    const h1 = getByText(/cool Star/);
-    expect(h1).toHaveTextContent("Cool Start")
+    const h1 = getByText(/Cool star/);
+    expect(h1).toHaveTextContent("Cool star")
 });

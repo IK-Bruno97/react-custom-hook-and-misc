@@ -1,4 +1,4 @@
-export function TimesTwo(){
+export function TimesTwo(a){
     return a * 2;
 }
 

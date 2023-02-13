@@ -1,7 +1,19 @@
 import { useState } from "react";
 import { useEffect } from "react";
 
-function App(){
+function GithubUser({name, location, img}){
+    return(
+        <>
+            <h1>{name}</h1>
+            <h1>{location}</h1>
+            <img src={img} />
+        </>
+        
+
+    )
+}
+
+export default function App(){
     const [data, setData] = useState(null);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);

@@ -1,32 +1,30 @@
+import {FaStar} from 'react-icons/fa';
+import { useState } from 'react';
 
-import { useState } from "react";
-import { useEffect } from "react";
+const createArray = (length) => [...Array(length)];
 
-function App(){
-    const [data, setData] = useState(null);
-    const [error, setError] = useState(null);
-    const [loading, setLoading] = useState(false);
-
-    useEffect( () => {
-        setLoading(true);
-        fetch(
-            'https://api.github.com/users/IK-Bruno97'
-        ) 
-        .then( (res) => res.json())
-        .then(setData)
-        .then( () => setLoading(false))
-        .catch(setError);
-    }, []);
-
-    if(loading) return <h1 className="App">loading...</h1>;
-    if(error) return <pre>{JSON.stringify(error)}</pre>;
-    if(!data) return null;
+function Star({selected=false, onSelect}){
     return(
-        <GithubUser name={data.name}
-            location = {data.location}
-            img ={data.avatar}
-        />
+        <FaStar color={ selected ? "red" : "grey"} onClick={onSelect} />
     );
 }
 
-export default App;
+function StarRating({totalStars}){
+    const [selectedStars, setSelectedStars] = useState(0);
+    return(
+        <>
+            {
+                createArray(totalStars).map((n,i) => (
+                    <Star key={i} 
+                    selected = {selectedStars > i} 
+                    onSelect={()=>setSelectedStars(i + 1)} />
+                ))
+            }
+            <p> {selectedStars} of {totalStars} </p>     
+        </>
+    );
+}
+
+export default function App(){
+    return <StarRating totalStars={4} />;
+}

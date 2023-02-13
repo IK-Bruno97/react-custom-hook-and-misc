@@ -9,9 +9,9 @@ function List({data, renderItem, renderEmpty}){
     return !data.lenght ? (renderEmpty) : (
         <ul> 
             { 
-                data.map(item) => (
-                    <li key={data.name}> {renderItem} </li>
-                ) 
+                data.map((item) => (
+                    <li key={data.name}> {renderItem(item)} </li>
+                )) 
             } 
         </ul>
     );

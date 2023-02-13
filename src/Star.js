@@ -9,12 +9,18 @@ function Star({selected=false, onSelect}){
     );
 }
 
-function StarRating({totalStars=5}){
+function StarRating({totalStars}){
     const [selectedStars, setSelectedStars] = useState(0);
     return(
         <>
-            {createArray(totalStars).map((n,i) => (<Star key={i} selected = {selectedStars > i} onSelect={()=>selectedStars(i + 1)} ))}
-            <p> {selectedStars} of {totalStars}</p>     
+            {
+                createArray(totalStars).map((n,i) => (
+                    <Star key={i} 
+                    selected = {selectedStars > i} 
+                    onSelect={()=>selectedStars(i + 1)} />
+                ))
+            }
+            <p> {selectedStars} of {totalStars} </p>     
         </>
     );
 }
